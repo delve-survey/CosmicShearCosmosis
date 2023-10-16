@@ -1,14 +1,14 @@
-import h5py as h
+#import h5py as h
 import numpy as np
 import treecorr
 import os
 import time
 
-bslop = 0.001
+bslop = 0.005
 PROCESS = int(os.environ['SLURM_PROCID']) #sbatching a job on 10 nodes will spawn 10 tasks (if you do it right) 
 THREADS = int(os.environ['OMP_NUM_THREADS']) #must be exported in the batch job script, 32 for cori/haswell and 68 for cori/knl
-outpath = '/home/secco/CosmicShearCosmosis/covariance/JK/output_JK/'
-catlocation = '/home/secco/CosmicShearCosmosis/covariance/JK/'
+outpath = '/home/secco/DELVE/CosmicShearCosmosis/covariance/JK/output_JK/'
+catlocation = '/home/secco/DELVE/CosmicShearCosmosis/covariance/JK/'
 
 #Deciding which process does which bin combination i,j:
 #Will only work correctly if you start 10 processes
