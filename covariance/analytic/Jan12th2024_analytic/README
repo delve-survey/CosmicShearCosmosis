@@ -1,0 +1,19 @@
+All information was taken from:
+
+https://docs.google.com/presentation/d/1mbV3dlak4yIiHlDLFZSLoXCkqNgHAcTrW_Rs7apbiIE/edit#slide=id.g2ada5c02de8_0_0
+
+https://docs.google.com/presentation/d/1mbV3dlak4yIiHlDLFZSLoXCkqNgHAcTrW_Rs7apbiIE/edit#slide=id.g2ada5c02de8_0_11
+
+https://docs.google.com/presentation/d/1mbV3dlak4yIiHlDLFZSLoXCkqNgHAcTrW_Rs7apbiIE/edit#slide=id.g2ad954ab179_0_0
+
+The number densities in the covariance were rescaled to preserve the shape noise contribution [so (sigma_e^2/neff) is preserved]:
+
+```
+import numpy as np 
+#taking numbers from https://docs.google.com/presentation/d/1mbV3dlak4yIiHlDLFZSLoXCkqNgHAcTrW_Rs7apbiIE/edit#slide=id.g2ada5c02de8_0_11
+sigma_e_squared_new = (0.273)**2 #non-tomographic C13
+sigma_e_squared_old = np.array([ 0.249**2, 0.275**2, 0.267**2, 0.324**2 ]) #tomographic C13
+neff_old = np.array([ 1.254, 1.226, 1.196, 1.102 ])
+neff_new = (sigma_e_squared_new/sigma_e_squared_old)*neff_old
+print(neff_new)
+```
