@@ -17,3 +17,12 @@ neff_old = np.array([ 1.254, 1.226, 1.196, 1.102 ])
 neff_new = (sigma_e_squared_new/sigma_e_squared_old)*neff_old
 print(neff_new)
 ```
+
+### Mask normalization:
+
+The mask file (c_footprint_file) that should be passed to cosmocov is a 2-column (ell, C(ell)) with the C(ell)'s of the survey footprint. However, you *must* normalize it:
+
+```
+alm=hp.map2alm(mask,lmax=lmax,use_pixel_weights=True)
+cl=hp.alm2cl(alm)*mask.shape[0]/np.sum(mask**2)
+```
