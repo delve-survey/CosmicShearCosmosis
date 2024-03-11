@@ -139,10 +139,42 @@ class FiducialRunner:
         M_p = Mask[:self.Nind]
         M_m = Mask[self.Nind:]
         
-        xip_min = [np.min(ang_val[i*N:(i_1)*N][M_p[i*N:(i_1)*N]]) for i in range(self.Nind//N)]
-        xim_min = [np.min(ang_val[i*N:(i_1)*N][M_m[i*N:(i_1)*N]]) for i in range(self.Nind//N)]
+        xip_min = [np.min(ang_val[i*N:(i+1)*N][M_p[i*N:(i+1)*N]]) for i in range(self.Nind//N)]
+        xim_min = [np.min(ang_val[i*N:(i+1)*N][M_m[i*N:(i+1)*N]]) for i in range(self.Nind//N)]
         
         return xip_min, xim_min
+    
+    
+    def get_cuts_cosmosis(self, Mask):
+        
+        text = "[2pt_like]"
+        
+        ang_val = self._cosmosis_to_dvs(self.FID,  'ANG')[:self.Nind]
+        
+        N = np.unique(self.ang).size
+        
+        M_p = Mask[:self.Nind]
+        M_m = Mask[self.Nind:]
+        
+        
+        xip_min = [np.min(ang_val[i*N:(i+1)*N][M_p[i*N:(i+1)*N]]) for i in range(self.Nind//N)]
+        xim_min = [np.min(ang_val[i*N:(i+1)*N][M_m[i*N:(i+1)*N]]) for i in range(self.Nind//N)]
+        
+        
+        bins = combinations_with_replacement(range(4), 2)
+        for i, b in enumerate(bins):
+            text += "\nangle_range_xip_%d_%d = %0.3f 999.0" % (b[0], b[1], xip_min[i])
+            
+        
+        text += "\n"
+        bins = combinations_with_replacement(range(4), 2)
+        for i, b in enumerate(bins):
+            text += "\nangle_range_xim_%d_%d = %0.3f 999.0" % (b[0], b[1], xim_min[i])
+            
+            
+        print(text)
+        
+        return None
     
     
     
