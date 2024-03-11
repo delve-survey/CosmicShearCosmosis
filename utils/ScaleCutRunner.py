@@ -1,6 +1,6 @@
 import numpy as np
 from astropy.io import fits
-
+from itertools import combinations_with_replacement
 
 class FiducialRunner:
 
@@ -163,13 +163,13 @@ class FiducialRunner:
         
         bins = combinations_with_replacement(range(4), 2)
         for i, b in enumerate(bins):
-            text += "\nangle_range_xip_%d_%d = %0.3f 999.0" % (b[0], b[1], xip_min[i])
+            text += "\nangle_range_xip_%d_%d = %0.3f 999.0" % (b[0] + 1, b[1] + 1, xip_min[i])
             
         
         text += "\n"
         bins = combinations_with_replacement(range(4), 2)
         for i, b in enumerate(bins):
-            text += "\nangle_range_xim_%d_%d = %0.3f 999.0" % (b[0], b[1], xim_min[i])
+            text += "\nangle_range_xim_%d_%d = %0.3f 999.0" % (b[0] + 1, b[1] + 1, xim_min[i])
             
             
         print(text)
