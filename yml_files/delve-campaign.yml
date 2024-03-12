@@ -2,14 +2,14 @@
 # suite of related runs.
 
 # All the outputs will go in a subdirectory of the output directory
-output_dir: "./output/delve-campaign"
+output_dir: $OUTDIR/delve_campaign
 
 # The list of runs
 runs:
   # This fiducial run is loaded directly from an ini file
   # to start with, then modifications applied
   - name: fiducial
-    base: examples/delve-shear.ini
+    base: $CSC_SRC_DIR/ini_files/delve-shear.ini
 
   # This is only here for testing - you can instead test a
   # pipeline using the "-t" command
@@ -21,7 +21,7 @@ runs:
   - name: baryon-contam
     parent: fiducial
     params:
-    - DEFAULT.2PT_FILE = likelihood/delve/simulated_shear_delve_logPkRatio_owls_AGN.fits  
+    - DEFAULT.2PT_FILE = $CSC_SRC_DIR/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits  
 
   - name: nocuts
     parent: fiducial
@@ -31,7 +31,7 @@ runs:
     parent: fiducial
     components: no-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = likelihood/delve/simulated_shear_delve_logPkRatio_owls_AGN.fits
+    - DEFAULT.2PT_FILE = $CSC_SRC_DIR/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits
 
   - name: bin-by-bin-cuts
     parent: fiducial
@@ -41,7 +41,7 @@ runs:
     parent: fiducial
     components: bin-by-bin-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = likelihood/delve/simulated_shear_delve_logPkRatio_owls_AGN.fits
+    - DEFAULT.2PT_FILE = $CSC_SRC_DIR/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits
 
   - name: fiducial-cuts
     parent: fiducial
@@ -51,7 +51,7 @@ runs:
     parent: fiducial
     components: fiducial-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = likelihood/delve/simulated_shear_delve_logPkRatio_owls_AGN.fits
+    - DEFAULT.2PT_FILE = $CSC_SRC_DIR/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits
 
 components:
   no-scale-cuts:
