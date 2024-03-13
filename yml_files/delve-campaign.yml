@@ -9,7 +9,7 @@ runs:
   # This fiducial run is loaded directly from an ini file
   # to start with, then modifications applied
   - name: fiducial
-    base: ../CosmicShearCosmosis/ini_files/delve-shear.ini
+    base: ../CosmicShearCosmosis/ini_files/delve-dr3-nautilus.ini
 
   # This is only here for testing - you can instead test a
   # pipeline using the "-t" command
@@ -21,37 +21,43 @@ runs:
   - name: baryon-contam
     parent: fiducial
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits  
+    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits  
 
   - name: nocuts
     parent: fiducial
-    components: no-scale-cuts
+    components: 
+    - no-scale-cuts
 
   - name: baryon-contam-nocuts
     parent: fiducial
-    components: no-scale-cuts
+    components: 
+    - no-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits
+    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits
 
   - name: bin-by-bin-cuts
     parent: fiducial
-    components: bin-by-bin-scale-cuts
+    components: 
+    - bin-by-bin-scale-cuts
 
   - name: baryon-contam-bin-by-bin-cuts
     parent: fiducial
-    components: bin-by-bin-scale-cuts
+    components: 
+    - bin-by-bin-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits
+    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits
 
   - name: fiducial-cuts
     parent: fiducial
-    components: fiducial-scale-cuts
+    components: 
+    - fiducial-scale-cuts
 
   - name: baryon-contam-fiducial-cuts
     parent: fiducial
-    components: fiducial-scale-cuts
+    components: 
+    - fiducial-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/simulated_shear_delve_logPkRatio_owls_AGN.fits
+    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits
 
 components:
   no-scale-cuts:
