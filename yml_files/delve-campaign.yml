@@ -2,14 +2,14 @@
 # suite of related runs.
 
 # All the outputs will go in a subdirectory of the output directory
-output_dir: "./output/delve-campaign"
+output_dir: ${OUTDIR}/delve-campaign
 
 # The list of runs
 runs:
   # This fiducial run is loaded directly from an ini file
   # to start with, then modifications applied
   - name: fiducial
-    base: ../CosmicShearCosmosis/ini_files/delve-dr3-nautilus.ini
+    base: ${REPO_DIR}/ini_files/delve-dr3-nautilus.ini
 
   # This is only here for testing - you can instead test a
   # pipeline using the "-t" command
@@ -21,7 +21,7 @@ runs:
   - name: baryon-contam
     parent: fiducial
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits  
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits  
 
   - name: nocuts
     parent: fiducial
@@ -33,7 +33,7 @@ runs:
     components: 
     - no-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
 
   - name: bin-by-bin-cuts
     parent: fiducial
@@ -45,7 +45,7 @@ runs:
     components: 
     - bin-by-bin-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
 
   - name: fiducial-cuts
     parent: fiducial
@@ -57,7 +57,7 @@ runs:
     components: 
     - fiducial-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ../CosmicShearCosmosis/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
 
 components:
   no-scale-cuts:

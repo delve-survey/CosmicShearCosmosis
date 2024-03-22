@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name COSMOSIS_example
 #SBATCH --output=/home/dhayaa/Cosmosis/%x.log
-#SBATCH --partition=chihway
-#SBATCH --account=chihway
+#SBATCH --partition=caslake
+#SBATCH --account=pi-chihway
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=40
+#SBATCH --ntasks-per-node=48
 #SBATCH --time=30:00:00
 #SBATCH --mail-user=dhayaa@uchicago.edu
 #SBATCH --mail-type=BEGIN,END
@@ -18,5 +18,20 @@
 
 conda activate /project/chihway/envs/cosmosis3
 
-#Run cosmosis with 40 cores (the max cores on a chihway node)
-mpirun -n 40 cosmosis --mpi params.ini
+#If you are running a yml file then somehow this step is needed
+#to expand env variables in yml file
+
+YML=$REPO_DIR/yml_files/delve-campaign.yml
+envsubst < $YML > $TMPDIR/testing.yml
+
+
+#INI file works as usual
+INI=$REPO_DIR/ini_files/des-y3-shear.ini
+
+
+#Campaign file runs
+mpirun -n 48 cosmosis-campaign --mpi $TMPDIR/testing.yml --run fiducial
+
+
+#If ini file
+mpirun -n 48 cosmosis --mpi $INI
