@@ -7,3 +7,13 @@ then
     export OUTDIR=/project/chihway/dhayaa/DECADE/cosmosis/
     export COSMOSIS_DIR=/home/dhayaa/DECADE/cosmosis-standard-library/
 fi
+
+if [ "$USER" == "chihway" ]
+then
+    export REPO_DIR=/project/chihway/chihway/CosmicShearCosmosis/
+    export OUTDIR=/project/chihway/chihway/CosmicShearCosmosis/analysis/
+    export COSMOSIS_DIR=/home/chihway/cosmosis-standard-library/
+    export TMPDIR=/project/chihway/chihway/CosmicShearCosmosis/temp/
+fi
+
+
