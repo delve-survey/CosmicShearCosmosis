@@ -35,3 +35,6 @@ mpirun -n 48 cosmosis-campaign --mpi $TMPDIR/testing.yml --run fiducial
 
 #If ini file
 mpirun -n 48 cosmosis --mpi $INI
+
+# if you just want to do a test run
+# cosmosis $INI -p runtime.sampler='test'
