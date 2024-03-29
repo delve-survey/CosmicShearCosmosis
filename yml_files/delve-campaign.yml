@@ -39,11 +39,13 @@ runs:
     parent: fiducial
     components: 
     - bin-by-bin-scale-cuts
+    - fix-nuisance-params
 
   - name: baryon-contam-bin-by-bin-cuts
     parent: fiducial
     components: 
     - bin-by-bin-scale-cuts
+    - fix-nuisance-params
     params:
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
 
@@ -51,14 +53,16 @@ runs:
     parent: fiducial
     components: 
     - fiducial-scale-cuts
+    - fix-nuisance-params
 
   - name: baryon-contam-fiducial-cuts
     parent: fiducial
     components: 
     - fiducial-scale-cuts
+    - fix-nuisance-params
     params:
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
-
+  
 components:
   no-scale-cuts:
     params:
@@ -126,4 +130,13 @@ components:
     - 2pt_like.angle_range_xim_3_3 = 56.586 999.0
     - 2pt_like.angle_range_xim_3_4 = 71.238 999.0
     - 2pt_like.angle_range_xim_4_4 = 56.586 999.0
-
+  fix-nuisance-params:
+   values:
+   - shear_calibration_parameters.m1 = 0.0
+   - shear_calibration_parameters.m2 = 0.0
+   - shear_calibration_parameters.m3 = 0.0
+   - shear_calibration_parameters.m4 = 0.0
+   - wl_photoz_errors.bias_1 = 0.0
+   - wl_photoz_errors.bias_2 = 0.0
+   - wl_photoz_errors.bias_3 = 0.0
+   - wl_photoz_errors.bias_4 = 0.0
