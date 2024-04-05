@@ -12,6 +12,10 @@ data_dir='/project/chihway/chihway/shearcat/shear_catalog/datavec/'
 unblinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_04052024.fits'
 blinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_04052024_BLINDED.fits'
 
+# it is a little strange that it seems like we need to be in a large node to do this
+#cd /project/chihway/chihway/CosmicShearCosmosis/
+#source setup_cosmosis.sh
+
 # Step 1
 echo 'step 1'
 python MakeBlindedDV.py $sim_dv $data_dir $unblinded_dv
