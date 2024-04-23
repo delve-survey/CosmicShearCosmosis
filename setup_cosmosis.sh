@@ -17,4 +17,9 @@ then
     export COSMOSIS_SRC_DIR=/home/chihway/
 fi
 
-
+if [ "$USER" == "nchicoine" ]
+then
+    export REPO_DIR=/home/nchicoine/delve/CosmicShearCosmosis/
+    export OUTDIR=/project/chihway/nchicoine/DECADE/cosmosis/
+    export COSMOSIS_DIR=/home/nchicoine/delve/cosmosis-standard-library/
+fi
