@@ -63,7 +63,7 @@ MODE = save_2pt
 
 [pipeline]
 modules =  consistency  bbn_consistency
-           camb sigma8_rescale fast_pt ; add baryon after sigma8_rescale
+           camb sigma8_rescale fast_pt
            fits_nz IA pk_to_cl
            add_intrinsic
            2pt_shear
@@ -257,3 +257,13 @@ with open('./shear_test.ini', 'w') as f:  f.write( INI.replace("save_2pt", "2pt_
 
 os.system('cosmosis shear.ini')
 os.system('cosmosis shear_test.ini')
+
+
+
+with open('./shear_baryon.ini', 'w') as f:   f.write( (INI
+                                                       .replace("camb sigma8_rescale", "camb sigma8_rescale baryon")
+                                                       .replace("filename = %(2PT_FILE)s", 
+                                                                "filename = %s" % OUTFILE.replace('baseline', 'baryon'))
+                                                      )
+                                                    )
+os.system('cosmosis shear_baryon.ini')
