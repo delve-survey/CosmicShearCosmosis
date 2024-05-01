@@ -8,6 +8,7 @@ OUTFILE = "baseline_April23rd2024.fits"
 
 #Clean up first
 os.system('rm %s' % OUTFILE)
+os.system('rm %s' % OUTFILE.replace('baseline', 'baryon') )
 
 
 FILES = {'n_of_z' : '/project/chihway/dhayaa/DECADE/SOMPZ/Runs/20240408/n_of_z.npy',
