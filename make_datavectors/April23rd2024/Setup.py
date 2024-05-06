@@ -28,6 +28,10 @@ xim,    header_xim    = fits.getdata('placeholder.fits', 'xim', header=True)
 z_grid = np.load(FILES['z_grid'])
 n_of_z = np.load(FILES['n_of_z'])
 
+mask   = z_grid < 2
+z_grid = z_grid[mask]
+n_of_z = n_of_z[:, mask]
+
 
 header_source['NAXIS2'] = len(z_grid)
 source = QTable()
@@ -64,8 +68,9 @@ MODE = save_2pt
 
 [pipeline]
 modules =  consistency  bbn_consistency
-           camb sigma8_rescale fast_pt
-           fits_nz IA pk_to_cl
+           camb sigma8_rescale
+           fast_pt
+           fits_nz IA pk_to_cl 
            add_intrinsic
            2pt_shear
            shear_m_bias
@@ -113,7 +118,7 @@ nk=700
 file = %(BASE_DIR)s/utility/bbn_consistency/bbn_consistency.py
 
 [sigma8_rescale]
-file = %(BASE_DIR)s/utility/sample_sigma8/sigma8_rescale.py
+file = sigma8_rescale.py
 
 [fits_nz]
 file = %(BASE_DIR)s/number_density/load_nz_fits/load_nz_fits.py
