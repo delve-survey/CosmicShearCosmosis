@@ -28,10 +28,6 @@ xim,    header_xim    = fits.getdata('placeholder.fits', 'xim', header=True)
 z_grid = np.load(FILES['z_grid'])
 n_of_z = np.load(FILES['n_of_z'])
 
-mask   = z_grid < 2
-z_grid = z_grid[mask]
-n_of_z = n_of_z[:, mask]
-
 
 header_source['NAXIS2'] = len(z_grid)
 source = QTable()
@@ -237,10 +233,10 @@ omega_k      =  0.0
 tau          =  0.0697186
 
 [shear_calibration_parameters]
-m1 = -0.0063
-m2 = -0.0198
-m3 = -0.0241
-m4 = -0.0369
+m1 = 0.0
+m2 = 0.0
+m3 = 0.0
+m4 = 0.0
 
 [intrinsic_alignment_parameters]
 z_piv   =  0.62
