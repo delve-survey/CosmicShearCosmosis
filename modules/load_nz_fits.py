@@ -80,6 +80,7 @@ def load_histogram_form(ext, upsampling):
 def setup(options):
     nz_file = options.get_string(option_section, "nz_file")
     data_sets = options.get_string(option_section, "data_sets")
+    data_sets_outputs = options.get_string(option_section, "data_sets_outputs", data_sets) #Allow user to add new output name, but default to regular name
     upsampling = options.get_int(option_section, "upsampling", 1)
     prefix_extension = options.get_bool(
         option_section, "prefix_extension", True)
@@ -96,7 +97,7 @@ def setup(options):
         print("if you do not want this.")
     F = pyfits.open(nz_file)
     data = {}
-    for data_set in data_sets:
+    for data_set, data_set_output in zip(data_sets, data_sets_output):
         try:
             name = "NZ_" + data_set.upper() if prefix_extension else data_set.upper()
             print("    Looking at FITS extension {0}:".format(name))
@@ -107,6 +108,7 @@ def setup(options):
             ext = F[name]
 
         section = "NZ_" + data_set.upper() if prefix_section else data_set.upper()
+        section = section.replace(data_set.upper(), data_set_output.upper()) #Replace original name with new name when writing NZ into the cosmosis datablock/section
         z, nz = load_histogram_form(ext, upsampling)
         data[section] = (z, nz)
     return data
