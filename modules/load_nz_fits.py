@@ -80,7 +80,7 @@ def load_histogram_form(ext, upsampling):
 def setup(options):
     nz_file = options.get_string(option_section, "nz_file")
     data_sets = options.get_string(option_section, "data_sets")
-    data_sets_outputs = options.get_string(option_section, "data_sets_outputs", data_sets) #Allow user to add new output name, but default to regular name
+    data_sets_output = options.get_string(option_section, "data_sets_output", data_sets) #Allow user to add new output name, but default to regular name
     upsampling = options.get_int(option_section, "upsampling", 1)
     prefix_extension = options.get_bool(
         option_section, "prefix_extension", True)
