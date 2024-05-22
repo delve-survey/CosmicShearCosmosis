@@ -85,7 +85,10 @@ def setup(options):
     prefix_extension = options.get_bool(
         option_section, "prefix_extension", True)
     prefix_section = options.get_bool(option_section, "prefix_section", True)
+    
     data_sets = data_sets.split()
+    data_sets_output = data_sets_output.split()
+    
     if not data_sets:
         raise RuntimeError(
             "Option data_sets empty; please set the option data_sets=name1 name2 etc and I will search the fits file for nz_name2, nz_name2, etc.")
