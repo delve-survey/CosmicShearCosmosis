@@ -84,7 +84,7 @@ sourcephotoz : multihisto
 lensphotoz : 
 source_tomobins : 4
 lens_tomobins : 
-sigma_e : %(SIGMA_REF)0.8f
+sigma_e : %(SIGMA_REF_SQRT2)0.8f
 shear_REDSHIFT_FILE : %(REDSHIFT_FILE)s
 clustering_REDSHIFT_FILE : 
 source_n_gal : %(Ngal1)0.8f,%(Ngal2)0.8f,%(Ngal3)0.8f,%(Ngal4)0.8f
@@ -114,7 +114,7 @@ ll : false
 """
 
 args = {'SURVEY_AREA' : Survey_Size,
-        'SIGMA_REF'   : sigma_ref,
+        'SIGMA_REF_SQRT2'   : sigma_ref * np.sqrt(2),
         'REDSHIFT_FILE' : './Redshifts.nz',
         'Ngal1' : new_n_eff[0], 'Ngal2' : new_n_eff[1], 'Ngal3' : new_n_eff[2], 'Ngal4' : new_n_eff[3],
         'FOOTPRINT_CLS_FILE' : './Footprint_Cls.dat',
