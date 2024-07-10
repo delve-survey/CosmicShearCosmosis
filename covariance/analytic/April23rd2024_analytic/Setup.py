@@ -27,7 +27,7 @@ print("LOADED CATALOG")
 Survey_Mask = np.bincount(hp.ang2pix(4096, ra, dec, lonlat = True), minlength = hp.nside2npix(4096)) > 0
 Survey_Size = np.sum(Survey_Mask) * hp.nside2pixarea(4096, degrees = True) #Survey size in deg^2
 Cls = hp.anafast(Survey_Mask, use_pixel_weights = True)
-# Cls = Cls * Survey_Mask.shape[0]/np.sum(Survey_Mask**2)
+Cls = Cls/np.average(Survey_Mask) #Do 1/fsky normalization
 
 np.savetxt('./Footprint_Cls.dat', np.stack([np.arange(Cls.size), Cls], axis = 1), fmt = ['%d', '%e'], delimiter = ' ')
 
@@ -35,11 +35,11 @@ np.savetxt('./Footprint_Cls.dat', np.stack([np.arange(Cls.size), Cls], axis = 1)
 print("FINISHED CLS")
 
 #STEP TWO: rescale the number densities for cosmoscov friendly units
-sigma_e   = np.array([0.247, 0.280, 0.272, 0.317, ])
-sigma_ref = 0.3
-n_eff     = np.array([1.293, 1.188, 1.181, 1.084, ])
+sigma_e   = np.array([0.248, 0.282, 0.276, 0.327, ])
+sigma_ref = np.average(sigma_e)
+n_eff     = np.array([1.303, 1.206, 1.209, 1.150, ])
 
-new_n_eff = (sigma_ref**2/sigma_e**2)*n_eff
+new_n_eff = n_eff * (sigma_ref/sigma_e)**2
     
     
 print("FINISHED RESCALING")
