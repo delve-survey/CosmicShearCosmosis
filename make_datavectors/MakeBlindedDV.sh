@@ -9,8 +9,8 @@
 
 sim_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/baseline_April23rd2024.fits'
 data_dir='/project/chihway/chihway/shearcat/shear_catalog/datavec/'
-unblinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_08052024-v2.fits'
-blinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_08052024-v2_BLINDED.fits'
+unblinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_08052024.fits'
+blinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_08052024_BLINDED.fits'
 
 # it is a little strange that it seems like we need to be in a large node to do this
 #cd /project/chihway/chihway/CosmicShearCosmosis/
