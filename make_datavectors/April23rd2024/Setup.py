@@ -31,9 +31,9 @@ n_of_z = np.load(FILES['n_of_z'])
 
 header_source['NAXIS2'] = len(z_grid)
 source = QTable()
-source['Z_LOW']  = z_grid - (z_grid[1] - z_grid[0])
+source['Z_LOW']  = z_grid - (z_grid[1] - z_grid[0])/2
 source['Z_MID']  = z_grid
-source['Z_HIGH'] = z_grid + (z_grid[1] - z_grid[0])
+source['Z_HIGH'] = z_grid + (z_grid[1] - z_grid[0])/2
 source['BIN1'] = n_of_z[0]
 source['BIN2'] = n_of_z[1]
 source['BIN3'] = n_of_z[2]
