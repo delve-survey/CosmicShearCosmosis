@@ -97,6 +97,19 @@ runs:
     params:
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
 
+
+  #####################
+  # Data chains below #
+  #####################
+
+  - name: fiducial-data-blinded
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_08052024_BLINDED.fits
+
+
 components:
   no-scale-cuts:
     params:
