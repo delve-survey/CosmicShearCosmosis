@@ -50,7 +50,7 @@ z_grid = np.load(FILES['z_grid'])
 n_of_z = np.load(FILES['n_of_z']).T
 
 output = np.zeros([len(z_grid), 5])
-output[:, 0] = z_grid - (z_grid[1] - z_grid[0]) #This is to go from z_bin_center to z_bin_min. Cosmocov wants latter
+output[:, 0] = z_grid - (z_grid[1] - z_grid[0])/2 #This is to go from z_bin_center to z_bin_min. Cosmocov wants latter
 
 for i in range(4): output[:, i + 1] = n_of_z[:, i]
     
