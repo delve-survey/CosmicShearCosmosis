@@ -107,7 +107,7 @@ runs:
     components:
     - fiducial-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_08062024_BLINDED.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
 
 
 components:
