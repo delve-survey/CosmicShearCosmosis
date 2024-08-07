@@ -21,7 +21,7 @@ runs:
   - name: baryon-contam
     parent: fiducial
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits  
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss  
 
   - name: nocuts
     parent: fiducial
@@ -35,7 +35,7 @@ runs:
     - no-scale-cuts
     - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
 
   - name: TATT-nocuts
     parent: fiducial
@@ -51,7 +51,7 @@ runs:
     - fix-nuisance-params
     - TATT-model
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
 
   - name: bin-by-bin-cuts
     parent: fiducial
@@ -65,7 +65,7 @@ runs:
     - bin-by-bin-scale-cuts
     - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
 
   - name: fiducial-cuts
     parent: fiducial
@@ -79,7 +79,7 @@ runs:
     - fiducial-scale-cuts
     - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fits
   
   - name: TATT-fiducial-cuts
     parent: fiducial
@@ -95,8 +95,7 @@ runs:
     - fix-nuisance-params
     - TATT-model
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
-
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fits
 
   #####################
   # Data chains below #
@@ -107,6 +106,12 @@ runs:
     components:
     - fiducial-scale-cuts
     params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-blinded-hmcode
+    parent: fiducial
+    params:
+    - camb.halofit_version = mead2020
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
 
 
