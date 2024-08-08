@@ -7,10 +7,10 @@
 #
 # To unblind, we would just comment out Step 2 and 3
 
-sim_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/baseline_20240806.fits'
+sim_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/baseline_20240806_C13.fits'
 data_dir='/project/chihway/chihway/shearcat/shear_catalog/datavec/'
-unblinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240806.fits'
-blinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240806_BLINDED.fits'
+unblinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240806_C13.fits'
+blinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240806_C13_BLINDED.fits'
 
 # it is a little strange that it seems like we need to be in a large node to do this
 #cd /project/chihway/chihway/CosmicShearCosmosis/
@@ -24,6 +24,8 @@ python MakeBlindedDV.py $sim_dv $data_dir $unblinded_dv
 echo 'step 2'
 cd ../blinding
 python -m blind_2pt_cosmosis -i blind_delve_fiducial.ini -u $unblinded_dv -s "cosmic_shear_of_the_decade"
+
+# 0807 "decade"
 
 # Step 3
 echo 'step 3'
