@@ -97,6 +97,13 @@ runs:
     params:
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fits
 
+  - name: fiducial-sim-blinded
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baseline_20240806_BLINDED.fits
+
 
   #####################
   # Data chains below #
@@ -107,7 +114,15 @@ runs:
     components:
     - fiducial-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits 
+      # 0807 is not bimodal
+
+  - name: fiducial-data-blinded-C13
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_C13_BLINDED.fits
 
   - name: fiducial-data-blinded-hmcode
     parent: fiducial
@@ -153,6 +168,30 @@ runs:
     - drop-bin4
     params:
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-drop-bin1
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin1
+
+  - name: fiducial-data-drop-bin2
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin2
+
+  - name: fiducial-data-drop-bin3
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin3
+
+  - name: fiducial-data-drop-bin4
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin4
 
 
 components:
