@@ -21,7 +21,7 @@ runs:
   - name: baryon-contam
     parent: fiducial
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits  
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss  
 
   - name: nocuts
     parent: fiducial
@@ -35,7 +35,7 @@ runs:
     - no-scale-cuts
     - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
 
   - name: TATT-nocuts
     parent: fiducial
@@ -51,7 +51,7 @@ runs:
     - fix-nuisance-params
     - TATT-model
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
 
   - name: bin-by-bin-cuts
     parent: fiducial
@@ -65,7 +65,7 @@ runs:
     - bin-by-bin-scale-cuts
     - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
 
   - name: fiducial-cuts
     parent: fiducial
@@ -79,7 +79,7 @@ runs:
     - fiducial-scale-cuts
     - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fits
   
   - name: TATT-fiducial-cuts
     parent: fiducial
@@ -95,7 +95,14 @@ runs:
     - fix-nuisance-params
     - TATT-model
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_Jan12th24.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fits
+
+  - name: fiducial-sim-blinded
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baseline_20240806_BLINDED.fits
 
 
   #####################
@@ -107,7 +114,84 @@ runs:
     components:
     - fiducial-scale-cuts
     params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits 
+      # 0807 is not bimodal
+
+  - name: fiducial-data-blinded-C13
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_C13_BLINDED.fits
+
+  - name: fiducial-data-blinded-hmcode
+    parent: fiducial
+    params:
+    - camb.halofit_version = mead2020
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-blinded-hmcode-v2
+    parent: fiducial
+    components:
+    - y6kp-camb
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-blinded-drop-bin1
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin1
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-blinded-drop-bin2
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin2
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-blinded-drop-bin3
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin3
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-blinded-drop-bin4
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin4
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+
+  - name: fiducial-data-drop-bin1
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin1
+
+  - name: fiducial-data-drop-bin2
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin2
+
+  - name: fiducial-data-drop-bin3
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin3
+
+  - name: fiducial-data-drop-bin4
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - drop-bin4
 
 
 components:
@@ -177,18 +261,71 @@ components:
     - 2pt_like.angle_range_xim_3_3 = 56.586 999.0
     - 2pt_like.angle_range_xim_3_4 = 71.238 999.0
     - 2pt_like.angle_range_xim_4_4 = 56.586 999.0
+  drop-bin1:
+    params:
+    - 2pt_like.angle_range_xip_1_1 = 999.0 999.0
+    - 2pt_like.angle_range_xip_1_2 = 999.0 999.0
+    - 2pt_like.angle_range_xip_1_3 = 999.0 999.0
+    - 2pt_like.angle_range_xip_1_4 = 999.0 999.0
+    - 2pt_like.angle_range_xim_1_1 = 999.0 999.0
+    - 2pt_like.angle_range_xim_1_2 = 999.0 999.0
+    - 2pt_like.angle_range_xim_1_3 = 999.0 999.0
+    - 2pt_like.angle_range_xim_1_4 = 999.0 999.0
+  drop-bin2:
+    params:
+    - 2pt_like.angle_range_xip_1_2 = 999.0 999.0
+    - 2pt_like.angle_range_xip_2_2 = 999.0 999.0
+    - 2pt_like.angle_range_xip_2_3 = 999.0 999.0
+    - 2pt_like.angle_range_xip_2_4 = 999.0 999.0
+    - 2pt_like.angle_range_xim_1_2 = 999.0 999.0
+    - 2pt_like.angle_range_xim_2_2 = 999.0 999.0
+    - 2pt_like.angle_range_xim_2_3 = 999.0 999.0
+    - 2pt_like.angle_range_xim_2_4 = 999.0 999.0
+  drop-bin3:
+    params:
+    - 2pt_like.angle_range_xip_1_3 = 999.0 999.0
+    - 2pt_like.angle_range_xip_2_3 = 999.0 999.0
+    - 2pt_like.angle_range_xip_3_3 = 999.0 999.0
+    - 2pt_like.angle_range_xip_3_4 = 999.0 999.0
+    - 2pt_like.angle_range_xim_1_3 = 999.0 999.0
+    - 2pt_like.angle_range_xim_2_3 = 999.0 999.0
+    - 2pt_like.angle_range_xim_3_3 = 999.0 999.0
+    - 2pt_like.angle_range_xim_3_4 = 999.0 999.0
+  drop-bin4:
+    params:
+    - 2pt_like.angle_range_xip_1_4 = 999.0 999.0
+    - 2pt_like.angle_range_xip_2_4 = 999.0 999.0
+    - 2pt_like.angle_range_xip_3_4 = 999.0 999.0
+    - 2pt_like.angle_range_xip_4_4 = 999.0 999.0
+    - 2pt_like.angle_range_xim_1_4 = 999.0 999.0
+    - 2pt_like.angle_range_xim_2_4 = 999.0 999.0
+    - 2pt_like.angle_range_xim_3_4 = 999.0 999.0
+    - 2pt_like.angle_range_xim_4_4 = 999.0 999.0
+
   fix-nuisance-params:
-   values:
-   - shear_calibration_parameters.m1 = 0.0
-   - shear_calibration_parameters.m2 = 0.0
-   - shear_calibration_parameters.m3 = 0.0
-   - shear_calibration_parameters.m4 = 0.0
-   - wl_photoz_errors.bias_1 = 0.0
-   - wl_photoz_errors.bias_2 = 0.0
-   - wl_photoz_errors.bias_3 = 0.0
-   - wl_photoz_errors.bias_4 = 0.0
+    values:
+    - shear_calibration_parameters.m1 = 0.0
+    - shear_calibration_parameters.m2 = 0.0
+    - shear_calibration_parameters.m3 = 0.0
+    - shear_calibration_parameters.m4 = 0.0
+    - wl_photoz_errors.bias_1 = 0.0
+    - wl_photoz_errors.bias_2 = 0.0
+    - wl_photoz_errors.bias_3 = 0.0
+    - wl_photoz_errors.bias_4 = 0.0
   TATT-model:
-   values:
-   - intrinsic_alignment_parameters.A2 = -5.0 -1.36 5.0
-   - intrinsic_alignment_parameters.alpha2 = -5.0 -2.5 5.0
-   - intrinsic_alignment_parameters.bias_ta = 0.0 1.0 2.0
+    values:
+    - intrinsic_alignment_parameters.A2 = -5.0 -1.36 5.0
+    - intrinsic_alignment_parameters.alpha2 = -5.0 -2.5 5.0
+    - intrinsic_alignment_parameters.bias_ta = 0.0 1.0 2.0
+
+  y6kp-camb:
+    params:
+    - camb.AccuracyBoost=
+    - camb.halofit_version = mead2020
+    - camb.kmin = 1e-5
+    - camb.kmax = 100.0
+    - camb.nk = 500
+
+
+
+
