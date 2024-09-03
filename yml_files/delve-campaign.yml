@@ -73,6 +73,14 @@ runs:
     - fiducial-scale-cuts
     - fix-nuisance-params
 
+  - name: fiducial-cuts-polychord
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - fix-nuisance-params
+    params:
+    - sampler = polychord
+
   - name: baryon-contam-fiducial-cuts
     parent: fiducial
     components: 
@@ -114,8 +122,9 @@ runs:
     components:
     - fiducial-scale-cuts
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits 
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240901_BLINDED.fits
       # 0807 is not bimodal
+      # 0806 is bimodal
 
   - name: fiducial-data-blinded-C13
     parent: fiducial

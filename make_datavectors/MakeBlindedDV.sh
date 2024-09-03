@@ -7,10 +7,10 @@
 #
 # To unblind, we would just comment out Step 2 and 3
 
-sim_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/baseline_20240806_C13.fits'
+sim_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/baseline_20240901.fits'
 data_dir='/project/chihway/chihway/shearcat/shear_catalog/datavec/'
-unblinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240806_C13.fits'
-blinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240806_C13_BLINDED.fits'
+unblinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240901.fits'
+blinded_dv='/project/chihway/chihway/CosmicShearCosmosis/datavectors/data_20240901_BLINDED.fits'
 
 # it is a little strange that it seems like we need to be in a large node to do this
 #cd /project/chihway/chihway/CosmicShearCosmosis/
