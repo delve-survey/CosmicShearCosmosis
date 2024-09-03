@@ -21,20 +21,13 @@ conda activate /project/chihway/envs/cosmosis3
 #If you are running a yml file then somehow this step is needed
 #to expand env variables in yml file
 
+seed=$(date +%s%N)  # Using nanoseconds for more precision
+echo "USING SEED ${seed} FOR FILENAME"
 YML=$REPO_DIR/yml_files/delve-campaign.yml
-envsubst < $YML > $TMPDIR/testing.yml
-
-
-#INI file works as usual
-INI=$REPO_DIR/ini_files/des-y3-shear.ini
-
+envsubst < $YML > $TMPDIR/${seed}_testing.yml
 
 #Campaign file runs
-mpirun -n 48 cosmosis-campaign --mpi $TMPDIR/testing.yml --run fiducial
-
-
-#If ini file
-mpirun -n 48 cosmosis --mpi $INI
+mpirun -n 48 cosmosis-campaign --mpi $TMPDIR/${seed}_testing.yml --run fiducial
 
 # if you just want to do a test run
 # cosmosis $INI -p runtime.sampler='test'
