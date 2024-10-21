@@ -18,10 +18,21 @@ runs:
     params:
     - sampler = test
 
-  - name: baryon-contam
+  # The following are for scale cut tests #####################
+  
+  - name: fiducial-cuts
     parent: fiducial
+    components: 
+    - fiducial-scale-cuts
+    - fix-nuisance-params
+
+  - name: baryon-contam-fiducial-cuts
+    parent: fiducial
+    components: 
+    - fiducial-scale-cuts
+    - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss  
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240901.fits
 
   - name: nocuts
     parent: fiducial
@@ -35,82 +46,8 @@ runs:
     - no-scale-cuts
     - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240901.fits
 
-  - name: TATT-nocuts
-    parent: fiducial
-    components:
-    - no-scale-cuts
-    - fix-nuisance-params
-    - TATT-model
-
-  - name: baryon-contam-TATT-nocuts
-    parent: fiducial
-    components:
-    - no-scale-cuts
-    - fix-nuisance-params
-    - TATT-model
-    params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
-
-  - name: bin-by-bin-cuts
-    parent: fiducial
-    components: 
-    - bin-by-bin-scale-cuts
-    - fix-nuisance-params
-
-  - name: baryon-contam-bin-by-bin-cuts
-    parent: fiducial
-    components: 
-    - bin-by-bin-scale-cuts
-    - fix-nuisance-params
-    params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fitss
-
-  - name: fiducial-cuts
-    parent: fiducial
-    components: 
-    - fiducial-scale-cuts
-    - fix-nuisance-params
-
-  - name: fiducial-cuts-C13
-    parent: fiducial
-    components:
-    - fiducial-scale-cuts
-    - fix-nuisance-params
-    params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baseline_20240806_C13.fits
-
-  - name: fiducial-cuts-polychord
-    parent: fiducial
-    components:
-    - fiducial-scale-cuts
-    - fix-nuisance-params
-    params:
-    - sampler = polychord
-
-  - name: fiducial-cuts-hmcode
-    parent: fiducial
-    components:
-    - fiducial-scale-cuts
-    - fix-nuisance-params
-    params:
-    - camb.halofit_version = mead2020
-
-  - name: fiducial-nolargescale
-    parent: fiducial
-    components:
-    - fiducial-nolargescale
-    - fix-nuisance-params
-
-  - name: baryon-contam-fiducial-cuts
-    parent: fiducial
-    components: 
-    - fiducial-scale-cuts
-    - fix-nuisance-params
-    params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fits
-  
   - name: TATT-fiducial-cuts
     parent: fiducial
     components:
@@ -125,14 +62,66 @@ runs:
     - fix-nuisance-params
     - TATT-model
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240806.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240901.fits
 
-  - name: fiducial-sim-blinded
+  - name: fiducial-cuts-halofit
     parent: fiducial
     components:
     - fiducial-scale-cuts
+    - fix-nuisance-params
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baseline_20240806_BLINDED.fits
+    - camb.halofit_version = takahashi
+
+  - name: baryon-contam-fiducial-cuts-halofit
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - fix-nuisance-params
+    params:
+    - camb.halofit_version = takahashi
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240901.fits
+
+  - name: fiducial-nolargescale
+    parent: fiducial
+    components:
+    - fiducial-nolargescale
+    - fix-nuisance-params
+
+    # Full chain, sampling, and systematics ###########################
+
+  - name: fiducial-full
+    parent: fiducial
+    components: 
+    - fiducial-scale-cuts
+    - free-nuisance-params
+
+  - name: fiducial-full-polychord
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - free-nuisance-params
+    params:
+    - sampler = polychord
+
+  - name: fiducial-fix-m
+    parent: fiducial
+    components: 
+    - fiducial-scale-cuts
+    - fix-shear-m
+
+  - name: fiducial-fix-dz
+    parent: fiducial
+    components: 
+    - fiducial-scale-cuts
+    - fix-redshift-dz
+
+  - name: fiducial-fix-ia
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - free-nuisance-params
+    - fix-ia
+
 
 
   #####################
@@ -145,28 +134,19 @@ runs:
     - fiducial-scale-cuts
     params:
     - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240901_BLINDED.fits
-      # 0807 is not bimodal
-      # 0806 is bimodal
 
-  - name: fiducial-data-blinded-C13
-    parent: fiducial
-    components:
-    - fiducial-scale-cuts
-    params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_C13_BLINDED.fits
-
-  - name: fiducial-data-blinded-hmcode
+  - name: fiducial-data-blinded-halofit
     parent: fiducial
     params:
-    - camb.halofit_version = mead2020
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+    - camb.halofit_version = takahashi
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240901_BLINDED.fits
 
-  - name: fiducial-data-blinded-hmcode-v2
-    parent: fiducial
-    components:
-    - y6kp-camb
-    params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+      #- name: fiducial-data-blinded-hmcode-v2
+      #parent: fiducial
+      #components:
+      #- y6kp-camb
+      #params:
+      #- DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
 
   - name: fiducial-data-blinded-drop-bin1
     parent: fiducial
@@ -174,7 +154,7 @@ runs:
     - fiducial-scale-cuts
     - drop-bin1
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240901_BLINDED.fits
 
   - name: fiducial-data-blinded-drop-bin2
     parent: fiducial
@@ -182,7 +162,7 @@ runs:
     - fiducial-scale-cuts
     - drop-bin2
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240901_BLINDED.fits
 
   - name: fiducial-data-blinded-drop-bin3
     parent: fiducial
@@ -190,7 +170,7 @@ runs:
     - fiducial-scale-cuts
     - drop-bin3
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240901_BLINDED.fits
 
   - name: fiducial-data-blinded-drop-bin4
     parent: fiducial
@@ -198,7 +178,7 @@ runs:
     - fiducial-scale-cuts
     - drop-bin4
     params:
-    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240806_BLINDED.fits
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/data_20240901_BLINDED.fits
 
   - name: fiducial-data-drop-bin1
     parent: fiducial
@@ -248,6 +228,7 @@ components:
     - 2pt_like.angle_range_xim_3_3 = 0.0 999.0
     - 2pt_like.angle_range_xim_3_4 = 0.0 999.0
     - 2pt_like.angle_range_xim_4_4 = 0.0 999.0
+
   bin-by-bin-scale-cuts:
     params:
     - 2pt_like.angle_range_xip_1_1 = 7.124 999.0
@@ -270,6 +251,7 @@ components:
     - 2pt_like.angle_range_xim_3_3 = 89.683 999.0
     - 2pt_like.angle_range_xim_3_4 = 112.904 999.0
     - 2pt_like.angle_range_xim_4_4 = 71.238 999.0
+
   fiducial-scale-cuts:
     params:
     - 2pt_like.angle_range_xip_1_1 = 5.659 999.0
@@ -292,6 +274,7 @@ components:
     - 2pt_like.angle_range_xim_3_3 = 56.586 999.0
     - 2pt_like.angle_range_xim_3_4 = 71.238 999.0
     - 2pt_like.angle_range_xim_4_4 = 56.586 999.0
+
   fiducial-nolargescale:
     params:
     - 2pt_like.angle_range_xip_1_1 = 5.659 200.0
@@ -314,6 +297,7 @@ components:
     - 2pt_like.angle_range_xim_3_3 = 56.586 200.0
     - 2pt_like.angle_range_xim_3_4 = 71.238 200.0
     - 2pt_like.angle_range_xim_4_4 = 56.586 200.0
+
   drop-bin1:
     params:
     - 2pt_like.angle_range_xip_1_1 = 999.0 999.0
@@ -324,6 +308,7 @@ components:
     - 2pt_like.angle_range_xim_1_2 = 999.0 999.0
     - 2pt_like.angle_range_xim_1_3 = 999.0 999.0
     - 2pt_like.angle_range_xim_1_4 = 999.0 999.0
+
   drop-bin2:
     params:
     - 2pt_like.angle_range_xip_1_2 = 999.0 999.0
@@ -334,6 +319,7 @@ components:
     - 2pt_like.angle_range_xim_2_2 = 999.0 999.0
     - 2pt_like.angle_range_xim_2_3 = 999.0 999.0
     - 2pt_like.angle_range_xim_2_4 = 999.0 999.0
+
   drop-bin3:
     params:
     - 2pt_like.angle_range_xip_1_3 = 999.0 999.0
@@ -344,6 +330,7 @@ components:
     - 2pt_like.angle_range_xim_2_3 = 999.0 999.0
     - 2pt_like.angle_range_xim_3_3 = 999.0 999.0
     - 2pt_like.angle_range_xim_3_4 = 999.0 999.0
+
   drop-bin4:
     params:
     - 2pt_like.angle_range_xip_1_4 = 999.0 999.0
@@ -365,6 +352,50 @@ components:
     - wl_photoz_errors.bias_2 = 0.0
     - wl_photoz_errors.bias_3 = 0.0
     - wl_photoz_errors.bias_4 = 0.0
+
+  fix-shear-m:
+    values:
+    - shear_calibration_parameters.m1 = 0.0
+    - shear_calibration_parameters.m2 = 0.0
+    - shear_calibration_parameters.m3 = 0.0
+    - shear_calibration_parameters.m4 = 0.0
+    priors:
+    - wl_photoz_errors.bias_1 = gaussian 0.00 0.00674042
+    - wl_photoz_errors.bias_2 = gaussian 0.00 0.00786831
+    - wl_photoz_errors.bias_3 = gaussian 0.00 0.00728473
+    - wl_photoz_errors.bias_4 = gaussian 0.00 0.00793153
+
+  fix-redshift-dz:
+    values:
+    - wl_photoz_errors.bias_1 = 0.0
+    - wl_photoz_errors.bias_2 = 0.0
+    - wl_photoz_errors.bias_3 = 0.0
+    - wl_photoz_errors.bias_4 = 0.0
+    priors:
+    - shear_calibration_parameters.m1 = gaussian 0.0 0.00284
+    - shear_calibration_parameters.m2 = gaussian 0.0 0.00419
+    - shear_calibration_parameters.m3 = gaussian 0.0 0.00429
+    - shear_calibration_parameters.m4 = gaussian 0.0 0.00501
+
+  free-nuisance-params:
+    priors:
+    - shear_calibration_parameters.m1 = gaussian 0.0 0.00284
+    - shear_calibration_parameters.m2 = gaussian 0.0 0.00419
+    - shear_calibration_parameters.m3 = gaussian 0.0 0.00429
+    - shear_calibration_parameters.m4 = gaussian 0.0 0.00501
+    - wl_photoz_errors.bias_1 = gaussian 0.00 0.00674042
+    - wl_photoz_errors.bias_2 = gaussian 0.00 0.00786831
+    - wl_photoz_errors.bias_3 = gaussian 0.00 0.00728473
+    - wl_photoz_errors.bias_4 = gaussian 0.00 0.00793153
+
+  fix-ia:
+    values:
+    - intrinsic_alignment_parameters.A1 = 0.19
+    - intrinsic_alignment_parameters.A2 = 0.0
+    - intrinsic_alignment_parameters.alpha1 = -2.6
+    - intrinsic_alignment_parameters.alpha2 = 0.0
+    - intrinsic_alignment_parameters.bias_ta = 0.0
+
   TATT-model:
     values:
     - intrinsic_alignment_parameters.A2 = -5.0 -1.36 5.0
@@ -381,4 +412,39 @@ components:
 
 
 
+  #   # Other stuff #####################################################
+    
+  # - name: baryon-contam
+  #   parent: fiducial
+  #   params:
+  #   - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240901.fits
 
+  # - name: TATT-nocuts
+  #   parent: fiducial
+  #   components:
+  #   - no-scale-cuts
+  #   - fix-nuisance-params
+  #   - TATT-model
+
+  # - name: baryon-contam-TATT-nocuts
+  #   parent: fiducial
+  #   components:
+  #   - no-scale-cuts
+  #   - fix-nuisance-params
+  #   - TATT-model
+  #   params:
+  #   - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240901.fits
+
+  # - name: bin-by-bin-cuts
+  #   parent: fiducial
+  #   components: 
+  #   - bin-by-bin-scale-cuts
+  #   - fix-nuisance-params
+
+  # - name: baryon-contam-bin-by-bin-cuts
+  #   parent: fiducial
+  #   components: 
+  #   - bin-by-bin-scale-cuts
+  #   - fix-nuisance-params
+  #   params:
+  #   - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baryon_20240901.fits
