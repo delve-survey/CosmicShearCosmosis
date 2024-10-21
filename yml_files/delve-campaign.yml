@@ -73,6 +73,14 @@ runs:
     - fiducial-scale-cuts
     - fix-nuisance-params
 
+  - name: fiducial-cuts-C13
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - fix-nuisance-params
+    params:
+    - DEFAULT.2PT_FILE = ${REPO_DIR}/datavectors/baseline_20240806_C13.fits
+
   - name: fiducial-cuts-polychord
     parent: fiducial
     components:
@@ -80,6 +88,20 @@ runs:
     - fix-nuisance-params
     params:
     - sampler = polychord
+
+  - name: fiducial-cuts-hmcode
+    parent: fiducial
+    components:
+    - fiducial-scale-cuts
+    - fix-nuisance-params
+    params:
+    - camb.halofit_version = mead2020
+
+  - name: fiducial-nolargescale
+    parent: fiducial
+    components:
+    - fiducial-nolargescale
+    - fix-nuisance-params
 
   - name: baryon-contam-fiducial-cuts
     parent: fiducial
@@ -270,6 +292,28 @@ components:
     - 2pt_like.angle_range_xim_3_3 = 56.586 999.0
     - 2pt_like.angle_range_xim_3_4 = 71.238 999.0
     - 2pt_like.angle_range_xim_4_4 = 56.586 999.0
+  fiducial-nolargescale:
+    params:
+    - 2pt_like.angle_range_xip_1_1 = 5.659 200.0
+    - 2pt_like.angle_range_xip_1_2 = 7.124 200.0
+    - 2pt_like.angle_range_xip_1_3 = 7.124 200.0
+    - 2pt_like.angle_range_xip_1_4 = 7.124 200.0
+    - 2pt_like.angle_range_xip_2_2 = 7.124 200.0
+    - 2pt_like.angle_range_xip_2_3 = 7.124 200.0
+    - 2pt_like.angle_range_xip_2_4 = 7.124 200.0
+    - 2pt_like.angle_range_xip_3_3 = 7.124 200.0
+    - 2pt_like.angle_range_xip_3_4 = 7.124 200.0
+    - 2pt_like.angle_range_xip_4_4 = 5.659 200.0
+    - 2pt_like.angle_range_xim_1_1 = 56.586 200.0
+    - 2pt_like.angle_range_xim_1_2 = 56.586 200.0
+    - 2pt_like.angle_range_xim_1_3 = 56.586 200.0
+    - 2pt_like.angle_range_xim_1_4 = 56.586 200.0
+    - 2pt_like.angle_range_xim_2_2 = 56.586 200.0
+    - 2pt_like.angle_range_xim_2_3 = 56.586 200.0
+    - 2pt_like.angle_range_xim_2_4 = 56.586 200.0
+    - 2pt_like.angle_range_xim_3_3 = 56.586 200.0
+    - 2pt_like.angle_range_xim_3_4 = 71.238 200.0
+    - 2pt_like.angle_range_xim_4_4 = 56.586 200.0
   drop-bin1:
     params:
     - 2pt_like.angle_range_xip_1_1 = 999.0 999.0
